@@ -9,3 +9,10 @@
 This is a semi-official containerization of [Github Changelog Generator](https://github.com/skywinder/github-changelog-generator).
 
 For each Github Changelog Generator release, you will find the corresponding docker image tag.
+
+# How to Run this Image
+
+
+```
+$ docker run -it --rm -v "$(pwd)":/usr/local/src/your-app skywinder/github-changelog-generator
+```
