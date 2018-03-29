@@ -14,5 +14,5 @@ For each Github Changelog Generator release, you will find the corresponding doc
 
 
 ```
-$ docker run -it --rm -v "$(pwd)":/usr/local/src/your-app skywinder/github-changelog-generator
+$ docker run -it --rm -v "$(pwd)":/usr/local/src/your-app ferrarimarco/github-changelog-generator
 ```
