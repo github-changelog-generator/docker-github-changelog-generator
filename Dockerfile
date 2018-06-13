@@ -1,8 +1,7 @@
 FROM ruby:2.4-alpine3.7
 
 LABEL maintainer "ferrari.marco@gmail.com"
-RUN apk update && apk upgrade && \
-    apk add --no-cache bash git openssh
+RUN apk add --no-cache git
 
 ENV BUNDLER_VERSION 1.16.1
 
