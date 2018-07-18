@@ -3,10 +3,8 @@ FROM ruby:2.4-alpine3.7
 LABEL maintainer "ferrari.marco@gmail.com"
 RUN apk add --no-cache git
 
-ENV BUNDLER_VERSION 1.16.1
-
 COPY Gemfile Gemfile
-RUN gem install bundler --version $BUNDLER_VERSION \
+RUN gem install bundler --version $(cat Gemfile | grep bundler | awk -F "'" '{print $4}') \
   && bundle install --system \
   && gem uninstall bundler
 
