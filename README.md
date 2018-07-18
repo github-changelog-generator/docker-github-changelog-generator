@@ -1,5 +1,5 @@
 # Dockerized Github Changelog Generator
-
+[![Build Status](https://travis-ci.org/ferrarimarco/docker-github-changelog-generator.svg?branch=master)](https://travis-ci.org/ferrarimarco/docker-github-changelog-generator)
 
 ![Docker Stars](https://img.shields.io/docker/stars/ferrarimarco/github-changelog-generator.svg)
 [![Docker Pulls](https://img.shields.io/docker/pulls/ferrarimarco/github-changelog-generator.svg)](https://hub.docker.com/r/ferrarimarco/github-changelog-generator/)

@@ -1,0 +1,10 @@
+---
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t ferrarimarco/github-changelog-generator:latest .
+script:
+  - docker run --rm -it ferrarimarco/github-changelog-generator:latest
