@@ -1,4 +1,4 @@
-FROM ruby:2.5.1-alpine3.7
+FROM ruby:2.6.3-alpine3.9
 
 LABEL maintainer "ferrari.marco@gmail.com"
 RUN apk add --no-cache git
