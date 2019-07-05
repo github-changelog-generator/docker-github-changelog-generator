@@ -4,9 +4,10 @@
 
 This is an official containerization of [Github Changelog Generator](https://github.com/github-changelog-generator/github-changelog-generator).
 
-# How to Run this Image
+For each Github Changelog Generator release, you will find the corresponding docker image tag.
 
+## How to Run this Image
 
-```
-$ docker run -it --rm -v "$(pwd)":/usr/local/src/your-app ferrarimarco/github-changelog-generator
+```shell
+docker run -it --rm -v "$(pwd)":/usr/local/src/your-app ferrarimarco/github-changelog-generator
 ```
