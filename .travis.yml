@@ -5,7 +5,32 @@ language: minimal
 services:
   - docker
 
+jobs:
+  include:
+    - stage: Build and Publist Docker images
+      arch: amd64
+      env: PLAT=amd64
+    - arch: arm64
+      env: PLAT=arm64
+    - stage: Creating multiarch manifest file
+      script:
+        - echo "Nothing to do during 'Script'"
+      deploy:
+        provider: script
+        script: bash .travis/create_push_multiarch_manifest.sh
+        on:
+          branch: master
+          tags: true
+
 before_install:
-  - docker build -t ferrarimarco/github-changelog-generator:latest .
+  - source .travis/utils.sh
+
 script:
-  - docker run --rm -it ferrarimarco/github-changelog-generator:latest
+  - build_docker_image
+
+deploy:
+  provider: script
+  script: bash .travis/upload_docker_img.sh
+  on:
+    branch: master
+    tags: true
