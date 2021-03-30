@@ -1,6 +1,10 @@
 FROM ruby:2.6.4-alpine3.9
 
 LABEL maintainer "ferrari.marco@gmail.com"
+
+## Required because of package nio4r which is used by async-http-faraday
+RUN apk add --update alpine-sdk
+
 RUN apk add --no-cache git
 
 COPY Gemfile Gemfile
