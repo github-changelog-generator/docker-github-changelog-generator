@@ -1,8 +1,7 @@
 # Dockerized Github Changelog Generator
 
-[![Build Status](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)](https://travis-ci.com/github-changelog-generator/docker-github-changelog-generator)
-![Docker Stars](https://img.shields.io/docker/stars/ferrarimarco/github-changelog-generator.svg)
-[![Docker Pulls](https://img.shields.io/docker/pulls/ferrarimarco/github-changelog-generator.svg)](https://hub.docker.com/r/ferrarimarco/github-changelog-generator/)
+![main workflow](https://github.com/github-changelog-generator/docker-github-changelog-generator/actions/workflows/main.yml/badge.svg)
+![tag workflow](https://github.com/github-changelog-generator/docker-github-changelog-generator/actions/workflows/push-tagged-image.yml/badge.svg)
 
 This is an official containerization of [Github Changelog Generator](https://github.com/github-changelog-generator/github-changelog-generator).
 
