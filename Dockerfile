@@ -9,7 +9,7 @@ RUN apk add --no-cache \
 
 WORKDIR /
 COPY Gemfile Gemfile
-RUN gem install bundler --version $(cat Gemfile | grep bundler | awk -F "'" '{print $4}') \
+RUN gem install bundler --version $(grep bundler Gemfile | awk -F "'" '{print $4}') \
   && bundle install --system \
   && gem uninstall bundler \
   && rm Gemfile
