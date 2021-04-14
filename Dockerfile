@@ -17,7 +17,7 @@ RUN apk add --no-cache \
   && bundle install \
   && gem uninstall bundler \
   && rm Gemfile Gemfile.lock \
-  && rm -rf $GEM_HOME/cache \
+  && rm -rf "$GEM_HOME"/cache \
   && apk del .gem-installdeps
 
 ENV SRC_PATH /usr/local/src/your-app
