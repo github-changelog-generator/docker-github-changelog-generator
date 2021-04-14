@@ -10,5 +10,5 @@ For each Github Changelog Generator release, you will find the corresponding doc
 ## How to Run this Image
 
 ```shell
-docker run -it --rm -v "$(pwd)":/usr/local/src/your-app ferrarimarco/github-changelog-generator
+docker run -it --rm -v "$(pwd)":/usr/local/src/your-app githubchangeloggenerator/github-changelog-generator
 ```
