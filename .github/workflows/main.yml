@@ -1,5 +1,6 @@
 env:
   CONTAINER_IMAGE_TAG: githubchangeloggenerator/github-changelog-generator:latest
+  PUSH_IMAGES: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
 
 name: Build and deploy latest image
 
@@ -40,8 +41,6 @@ jobs:
         shell: bash
         run: docker run ${{ env.CONTAINER_IMAGE_TAG }}
   deploy:
-    env:
-      PUSH_IMAGES: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     environment: Docker Hub
     if: ${{ env.PUSH_IMAGES }}
     name: Deploy the container image
