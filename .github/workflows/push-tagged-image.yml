@@ -7,7 +7,8 @@ on:
 jobs:
   push:
     if: github.event_name == 'release' && github.event.action == 'created'
-    name: Deploy tagged image
+    environment: Docker Hub
+    name: Deploy tagged image (Docker Hub)
     needs: build
     runs-on: ubuntu-20.04
     steps:

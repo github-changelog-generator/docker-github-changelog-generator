@@ -17,7 +17,8 @@ jobs:
           VALIDATE_ALL_CODEBASE: true
   push:
     if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/')) }}
-    name: Deploy images
+    environment: Docker Hub
+    name: Deploy latest image (Docker Hub)
     needs: build
     runs-on: ubuntu-20.04
     steps:
