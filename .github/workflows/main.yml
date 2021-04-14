@@ -1,0 +1,34 @@
+name: Build and deploy latest image
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Lint the codebase
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - name: Super-Linter
+        uses: github/super-linter@v3.14.3
+        env:
+          ERROR_ON_MISSING_EXEC_BIT: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LINTER_RULES_PATH: .
+          VALIDATE_ALL_CODEBASE: true
+  push:
+    if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/')) }}
+    name: Deploy images
+    needs: build
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Push to Docker Hub (latest)
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ferrarimarco/github-changelog-generator:latest
