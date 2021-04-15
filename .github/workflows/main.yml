@@ -1,6 +1,6 @@
 env:
   CONTAINER_IMAGE_TAG: githubchangeloggenerator/github-changelog-generator:latest
-  DOCKER_BUILDX_PLATFORMS: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x
+  DOCKER_BUILDX_PLATFORMS: linux/amd64,linux/arm64
 
 name: Build and deploy latest image
 
