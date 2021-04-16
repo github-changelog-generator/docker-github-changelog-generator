@@ -1,7 +1,6 @@
 # Dockerized Github Changelog Generator
 
 ![main workflow](https://github.com/github-changelog-generator/docker-github-changelog-generator/actions/workflows/main.yml/badge.svg)
-![tag workflow](https://github.com/github-changelog-generator/docker-github-changelog-generator/actions/workflows/push-tagged-image.yml/badge.svg)
 
 This is an official containerization of [Github Changelog Generator](https://github.com/github-changelog-generator/github-changelog-generator).
 
