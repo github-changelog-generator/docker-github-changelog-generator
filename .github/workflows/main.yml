@@ -1,10 +1,15 @@
 env:
-  CONTAINER_IMAGE_TAG: githubchangeloggenerator/github-changelog-generator:latest
+  CONTAINER_IMAGE_LATEST_TAG: githubchangeloggenerator/github-changelog-generator:latest
+  CONTAINER_IMAGE_RELEASE_TAG: githubchangeloggenerator/github-changelog-generator:${{ github.event.release.tag_name }}
   DOCKER_BUILDX_PLATFORMS: linux/amd64,linux/arm64
 
-name: Build and deploy latest image
+name: Build the container image and eventually deploy it
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  release:
+    types: [created]
 
 jobs:
   build:
@@ -30,10 +35,10 @@ jobs:
           file: ./Dockerfile
           platforms: ${{ env.DOCKER_BUILDX_PLATFORMS }}
           push: false
-          tags: ${{ env.CONTAINER_IMAGE_TAG }}
+          tags: ${{ env.CONTAINER_IMAGE_LATEST_TAG }}
   deploy:
     environment: Docker Hub
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+    if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/master') || (github.event_name == 'release' && github.event.action == 'created') }}
     name: Deploy the container image
     needs: build
     runs-on: ubuntu-20.04
@@ -48,14 +53,24 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build the contaiiner image for all the platforms and eventually push to Docker Hub (latest)
+      # This is to avoid duplicating the image building step
+      - if: ${{ github.event_name != 'release' }}
+        name: Set the CONTAINER_IMAGE_RELEASE_TAG environment variable
+        run: |
+          echo "CONTAINER_IMAGE_RELEASE_TAG=$CONTAINER_IMAGE_RELEASE_TAGlatest" >> $GITHUB_ENV
+      - name: Build the container image for all the platforms and eventually push to Docker Hub (latest)
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./Dockerfile
           platforms: ${{ env.DOCKER_BUILDX_PLATFORMS }}
           push: true
-          tags: ${{ env.CONTAINER_IMAGE_TAG }}
-      - name: Test the container image
+          tags:
+            - ${{ env.CONTAINER_IMAGE_LATEST_TAG }}
+            - ${{ env.CONTAINER_IMAGE_RELEASE_TAG }}
+      - name: Test the latest container image
         shell: bash
-        run: docker run ${{ env.CONTAINER_IMAGE_TAG }}
+        run: docker run ${{ env.CONTAINER_IMAGE_LATEST_TAG }}
+      - name: Test the release container image
+        shell: bash
+        run: docker run ${{ env.CONTAINER_IMAGE_RELEASE_TAG }}
