@@ -65,9 +65,7 @@ jobs:
           file: ./Dockerfile
           platforms: ${{ env.DOCKER_BUILDX_PLATFORMS }}
           push: true
-          tags:
-            - ${{ env.CONTAINER_IMAGE_LATEST_TAG }}
-            - ${{ env.CONTAINER_IMAGE_RELEASE_TAG }}
+          tags: ${{ env.CONTAINER_IMAGE_LATEST_TAG }},${{ env.CONTAINER_IMAGE_RELEASE_TAG }}
       - name: Test the latest container image
         shell: bash
         run: docker run ${{ env.CONTAINER_IMAGE_LATEST_TAG }}
