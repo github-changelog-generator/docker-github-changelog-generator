@@ -57,7 +57,7 @@ jobs:
       - if: ${{ github.event_name != 'release' }}
         name: Set the CONTAINER_IMAGE_RELEASE_TAG environment variable
         run: |
-          echo "CONTAINER_IMAGE_RELEASE_TAG=$CONTAINER_IMAGE_RELEASE_TAGlatest" >> $GITHUB_ENV
+          echo "CONTAINER_IMAGE_RELEASE_TAG=${CONTAINER_IMAGE_LATEST_TAG}" >> $GITHUB_ENV
       - name: Build the container image for all the platforms and eventually push to Docker Hub (latest)
         uses: docker/build-push-action@v2
         with:
